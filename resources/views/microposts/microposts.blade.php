@@ -9,12 +9,17 @@
                 <div>
                     <p class="mb-0">{{ nl2br(e($micropost->content)) }}</p>
                 </div>
-                <div>
-                    @if (Auth::id() == $micropost->user_id)
-                        {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sum']) !!}
-                        {!! Form::close() !!}
-                    @endif
+                <div class="row">
+                    <div class="offset-md-8">
+                        @include('favorite.favorite_button', ['favorite', $micropost->id])
+                    </div>
+                    <div>
+                        @if (Auth::id() == $micropost->user_id)
+                            {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sum']) !!}
+                            {!! Form::close() !!}
+                        @endif
+                    </div>
                 </div>
             </div>
         </li>
